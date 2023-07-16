@@ -1,0 +1,36 @@
+doScoring True
+doSegmentation True
+doSkeletonisation True
+fijiMacroPath return/fijiMacro.txt
+fijiPath ../../Scripts/Scoring2Script/Fiji.app/ImageJ-linux64
+getSpecificROI True
+inputReformatBG files/ReformatBG.nrrd
+maskFileBrain ../../Scripts/Scoring2Script/Templates/tempBrainMask.nrrd
+maskFileVNC ../../Scripts/Scoring2Script/Templates/tempVNCMask.nrrd
+score {'convB': [4, 4, 2], 'mAdd': [5, 5, 5], 'vScalerXYZ': [1.0, 1.0, 1.707], 'skipdips': [6, 6, 3], 'getSpecificROI': True, 'maxVoxels': 75000000, 'exploreB': [6, 6, 5], 'prodForWarping': [21, 21, 15],  'totalBorderWidth': array([81, 81, 36]), 'convValsMult': 10.0}
+scoreFromTemp False
+skelFileNamePre return/skel_
+thisType Brain or VNC
+useMask True
+vAbsoluteMinThresh 10
+vDivisor 1.0
+vMaxSpecleSize 100
+vScalerXYZ [1.0, 1.0, 1.707]
+vTempBrainLoc ../../Scripts/Scoring2Script/Templates/Pre_TempBrain.nrrd
+vTempVNCLoc ../../Scripts/Scoring2Script/Templates/Pre_TempVNC.nrrd
+vfieldNamePre return/S_Field_
+vfileInNamesRG [['R', 'files/ReformatR.nrrd', 'return/ReformatRc.nrrd'], ['G', 'files/ReformatG.nrrd', 'return/ReformatGc.nrrd']]
+vhistScore 100
+vlabelsNamePre return/S_Labels_
+vminVoxelsinNeuron 20000
+vneuronSep 3
+vneuronSepxyE 1
+vsaveLabels True
+vsaveScores True
+vsaveVoxelScores True
+vscoreFilePre return/Scores_
+vsigIt 3
+vthreshProp 0.999
+vvoxelScoreNamePre return/S_VoxelScores_
+
+
