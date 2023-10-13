@@ -8,7 +8,7 @@ import numpy as np
 from scipy import ndimage
 import copy
 import nrrd
-def getNeuronScores(settings,labeledImg,savedis,hRF,storage,filetype):
+def getNeuronScores(settings,labeledImg,nomIds,scoreField,storage,filetype):
     #ROI = settings['scoringROI']
     print "Pipeline:   Getting Neuron Scores..."
     multiplierA = np.ones((1,3))
@@ -18,15 +18,15 @@ def getNeuronScores(settings,labeledImg,savedis,hRF,storage,filetype):
         forExport = np.zeros(labeledImg.shape,dtype='uint8')
     else:
         forExport = None
-    # Recall that savedis is max+1 of neuron labels!
-    for Ni in range(1,savedis):
-        print "Pipeline:   Scoring neuron ",Ni," out of ",(savedis-1)
+    # Recall that nomIds is max+1 of neuron labels!
+    for Ni in range(1,nomIds):
+        print "Pipeline:   Scoring neuron ",Ni," out of ",(nomIds-1)
         newNeuron={'id':copy.deepcopy(Ni),
                    'sig':copy.deepcopy(filetype)}
         # get the Selector:
         thisSelector = labeledImg==Ni
         # PREMASK:
-        # sotre Centre of Mass:
+        # store Centre of Mass:
         cOM = ndimage.measurements.center_of_mass(thisSelector)
         cOM = [cOM[1],cOM[0],cOM[2]]
         newNeuron['cOM']=cOM
@@ -40,7 +40,7 @@ def getNeuronScores(settings,labeledImg,savedis,hRF,storage,filetype):
         newNeuron['inCOM'] = inCoM
         # calculate the score:
         # get the hypoteneuse SQUARED of the direction!
-        thisField = hRF[thisSelector,:]
+        thisField = scoreField[thisSelector,:]
         thisField = np.sum(np.power(thisField*multiplierA,2).astype('float'),axis=1)
         # histogram of directions (256 is limit)
         hist = np.histogram(thisField,256,(0,256))

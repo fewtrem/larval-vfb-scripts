@@ -1,0 +1,38 @@
+outFolderPath /exports/eddie/scratch/s1144899/SkelRepPruneTubed/Output/**ID**
+voxelDims [1.0, 1.0, 1.707]
+CBNonCB_batchSize 2000
+CBNonCB_thresh 0.9
+distanceChartFilePaths {
+    '**VNC**': '/exports/csce/eddie/inf/groups/eddie_inf_ndtc/s1144899/SkelPruneTubed/spread/MaskSpreadVNCInverse2.nrrd',
+    '**BRAIN**': '/exports/csce/eddie/inf/groups/eddie_inf_ndtc/s1144899/SkelPruneTubed/spread/MaskSpreadBrainInverse2.nrrd'
+}
+outFileName prunedSave_**ID**_**F**_**S**_**LAB**.pkl
+saveSettings True
+CBNonCB_cubeDim [3, 3, 3]
+minBranchLength 100
+CBNonCB_shape [41, 41]
+CBNonCB_threshSize 0.9
+imgFilesPaths {
+    'skel': '/exports/eddie/scratch/s1144899/Results15May2017/**ID**/skel_**F****S**.nrrd',
+    'ref': '/exports/eddie/scratch/s1144899/Results15May2017/**ID**/Reformat**F****S**.nrrd',
+    'label': '/exports/eddie/scratch/s1144899/Results15May2017/**ID**/S_Labels_**F****S**.nrrd'
+}
+CBNonCB_boundWidth [20, 20, 12]
+vDilateHetroSecondDer [4, 4, 2]
+modelA {
+    'CBNonCB_shape': [41, 41],
+    'CBNonCB_boundWidth': [20, 20, 12],
+    'CBNonCB_modelSetup': {
+        'Layers': [
+            ['conv', [5, 5, 1, 32], 0.002, 0.001, [1, 2, 2, 1], [1, 2, 2, 1]],
+            ['conv', [5, 5, 32, 64], 0.002, 0.001, [1, 2, 2, 1], [1, 2, 2, 1]],
+            ['neural', 100, 0.02, 0],
+            ['linear', 2, 0.2, 0]
+        ]
+    },
+    'CBNonCB_batchSize': 2000,
+    'CBNonCB_savedModelPath':'/exports/csce/eddie/inf/groups/eddie_inf_ndtc/s1144899/SkelPruneTubed/Code/CBNonCB/savedParams/GPUCNNsZProj'
+}
+threshForCBChecking -10
+settingsSaveName SettingsUsed_SkelPruneTubedCondenser.pkl
+minConnLength 50

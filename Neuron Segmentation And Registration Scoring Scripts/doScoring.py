@@ -9,21 +9,21 @@ from getNeuronScores import getNeuronScores
 settings - the settings...
 storage - the storage object.
 '''
-def doNeuronScoring(settings,storage,hRF,savedis):
+def doNeuronScoring(settings,storage,scoreField,neuronSegments):
     print "Pipeline: Calculating Scores For Each Neuron..."
     # we will open all channels and get the scores....
     scoresSAVE = {}
     for thisFileGet in settings['vfileInNamesRG']:
         print "Pipeline:   Channel: ",thisFileGet[0]
-        if savedis['set'] == True:
-            labeledImg = savedis["LI_"+thisFileGet[0]] # labeledImg NOT MASKED YET!
-            nomIds = savedis["NID_"+thisFileGet[0]]
+        if neuronSegments['set'] == True:
+            labeledImg = neuronSegments["LI_"+thisFileGet[0]] # labeledImg NOT MASKED YET!
+            nomIds = neuronSegments["NID_"+thisFileGet[0]]
         else:
             # load this version of the labelled image for identifying neurons:
             labeledImg = nrrd2.read(settings['vlabelsNamePre']+thisFileGet[0]+".nrrd")[0]
             nomIds = np.max(labeledImg)+1
         # get the score values:
-        newScores = getNeuronScores(settings,labeledImg,nomIds,hRF,storage,thisFileGet[0])
+        newScores = getNeuronScores(settings,labeledImg,nomIds,scoreField,storage,thisFileGet[0])
         scoresSAVE[thisFileGet[0]] = newScores
     # save a scoresR file
     if settings['vsaveScores'] == True:
